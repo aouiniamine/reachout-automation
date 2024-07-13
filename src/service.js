@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-
+const {html} = require('./data')
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_SERVER,
   port: process.env.SMTP_PORT,
@@ -17,17 +17,16 @@ transporter.verify((err, success) => {
     console.log("Server is ready to take our messages");
     }
 })
-const sendEmail = async (email) => {
+const sendEmail = async (to) => {
     try {
 
         const info = await transporter.sendMail({
             from: process.env.FROM, // sender address
-            to: "", // list of receivers
+            to, // reciever
             subject: process.env.SUBJECT, // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+            html: "hello", // html body
         })   
-        console.log("Email is sent:", info.messageId, ":" , email)
+        console.log("Email is sent:", info.messageId, ":" , to)
     } catch (err) {
         console.log(err)
     }
