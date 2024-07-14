@@ -24,7 +24,7 @@ const sendEmail = async (to) => {
             from: process.env.FROM, // sender address
             to, // reciever
             subject: process.env.SUBJECT, // Subject line
-            html: "hello", // html body
+            html // html body
         })   
         console.log("Email is sent:", info.messageId, ":" , to)
     } catch (err) {
